@@ -7,19 +7,31 @@
     //create onclick function for input button
     //use local storage to keep data inside divs or spans
     //button needs to make call to weather API
+    var leftCol = document.getElementById("leftCol");
+    var input = document.createElement("input");
+    var div = document.createElement("div")
+    var btn1 = document.createElement("button")
+    leftCol.textContent = ("Search for a city:");
+    leftCol.setAttribute("class", "h3 pl-5")
+    leftCol.appendChild(div);
+    div.appendChild(input);
+    input.setAttribute("class", "mt-3")
+    div.appendChild(btn1);
+    btn1.setAttribute("class", "fa fa-search 3x p-1 m-0 ml-3")
+
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=Gilbert,Arizona&appid=a2c6aeb70811d753296d3acafec7dceb";
 
       $.ajax({
         url: queryURL,
         method: "GET"
       })
-        .then(function(response) {
+      .then(function(response) {
           var results = response.data;
           console.log(results);
           console.log(response);
-          console.log(response.main.temp);
+          console.log(response.weather);
           
-          });
+        });
 
 
 // WHEN I view current weather conditions for that city
