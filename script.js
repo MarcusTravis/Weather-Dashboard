@@ -42,60 +42,64 @@
     cityInfoSpan.setAttribute("class", "h1 navbar");
 
     
-    btn1.addEventListener("click", function(e){
-        var inputVal = input.value;
-        console.log(inputVal)
-        
-    });
-    
-    
-    var queryURL1 = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="+ inputVal + "&appid=a2c6aeb70811d753296d3acafec7dceb";
+    // btn1.addEventListener("click", getLocalData() {
+    //     const city = input.value;
 
+    // });
     
+    
+    
+    
+    // const queryURL1 = `http://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`
+    // console.log(queryURL1)
+    var queryURL1 = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=Gilbert,Arizona&appid=a2c6aeb70811d753296d3acafec7dceb";
     $.ajax({
         url: queryURL1,
         method: "GET"
     })
-    .then(function(response) {
-        var results = response.data;
-        const temp = response.main.temp;
-        const wind = response.wind.speed;
-        const humid = response.main.humidity;
-        console.log(response);
+    .then(function(result) {
+            const response = result.data
+            const temp = response.main.temp;
+            const wind = response.wind.speed;
+            const humid = response.main.humidity;
+            console.log(response);
+            
+                
+            
+            
+            div3.appendChild(tempSpan);
+            tempSpan.innerText = ("Tempurature: " + temp);
+            tempSpan.setAttribute("class", "h4 mt-3 navbar");
+            
+            div3.appendChild(humidSpan);
+            humidSpan.textContent = ("Humidity: " + humid);
+            humidSpan.setAttribute("class", "h4 mt-3 navbar");
+            
+            div3.appendChild(windSpan);
+            windSpan.textContent = ("Wind Speed: " + wind);
+            windSpan.setAttribute("class", "h4 mt-3 navbar");
+        });
+  
+            
         
         
-        
-        div3.appendChild(tempSpan);
-        tempSpan.innerText = ("Tempurature: " + temp);
-        tempSpan.setAttribute("class", "h4 mt-3 navbar");
-        
-        div3.appendChild(humidSpan);
-        humidSpan.textContent = ("Humidity: " + humid);
-        humidSpan.setAttribute("class", "h4 mt-3 navbar");
-        
-        div3.appendChild(windSpan);
-        windSpan.textContent = ("Wind Speed: " + wind);
-        windSpan.setAttribute("class", "h4 mt-3 navbar");
-        
-        
-    });
-    
-    var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=33.35&lon=-111.79";
-    
-    $.ajax({
-        url: queryURL2,
-        method: "GET"
-    })
-    .then(function(response2) {
-        console.log(response2)
-        const UV = response2.value
-        
-
-        div3.appendChild(UVSpan);
-        UVSpan.textContent = ("UV Index: " + UV);
-        UVSpan.setAttribute("class", "h4 mt-3 navbar");
-    });
-    // WHEN I view current weather conditions for that city
+    function getUV(lat, lon) {
+        var queryURL2 = `http://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=${lat}&lon=${lon}`;
+        $.ajax({
+            url: queryURL2,
+            method: "GET"
+        })
+        .then(function(response) {
+            console.log(response)
+            const UV = response.value
+            
+            
+            div3.appendChild(UVSpan);
+            UVSpan.textContent = ("UV Index: " + UV);
+            UVSpan.setAttribute("class", "h4 mt-3 navbar");
+        });
+    }
+        // WHEN I view current weather conditions for that city
     // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
     //display info retrieved for API
     
