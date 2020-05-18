@@ -7,20 +7,22 @@
     //create onclick function for input button
     //use local storage to keep data inside divs or spans
     //button needs to make call to weather API
-    var leftCol = document.getElementById("leftCol");
-    var rightCol = document.getElementById("rightCol");
-    var input = document.createElement("input");
-    var div1 = document.createElement("div");
-    var div2 = document.createElement("div");
-    var div3 = document.createElement("div");
-    var div4 = document.createElement("div")
-    var cityInfoSpan = document.createElement("span");
-    var tempSpan = document.createElement("span");
-    var humidSpan = document.createElement("span");
-    var windSpan = document.createElement("span");
-    var UVSpan = document.createElement("div");
-    var linebreak = document.createElement("br");
-    var btn1 = document.createElement("button");
+    const body = document.getElementById("body");
+    body.setAttribute("class", "bg-dark");
+    const leftCol = document.getElementById("leftCol");
+    const rightCol = document.getElementById("rightCol");
+    const input = document.createElement("input");
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    const div3 = document.createElement("div");
+    const div4 = document.createElement("div")
+    const cityInfoSpan = document.createElement("span");
+    const tempSpan = document.createElement("span");
+    const humidSpan = document.createElement("span");
+    const windSpan = document.createElement("span");
+    const UVSpan = document.createElement("div");
+    const linebreak = document.createElement("br");
+    const btn1 = document.createElement("button");
     
     leftCol.setAttribute("class", "h2 pl-5 pr-5 pb-5  border rounded bg-light");
     leftCol.appendChild(div1);
@@ -33,11 +35,11 @@
     
 
     div2.appendChild(input);
-    input.setAttribute("class", "mt-3");
+    input.setAttribute("class", "mt-3 rounded");
     input.setAttribute("placeholder", "Search...");
     input.setAttribute("id", "input");
     div2.appendChild(btn1);
-    btn1.setAttribute("class", "fa fa-search 3x bg-primary rounded border p-1 m-0 ml-1");
+    btn1.setAttribute("class", "fa fa-search 3x bg-info rounded border p-1 m-0 ml-1");
     
     div3.appendChild(cityInfoSpan);
     
@@ -46,7 +48,7 @@
     
         function getInput() {
 
-            let inputVal = document.getElementById("input").value;
+            const inputVal = document.getElementById("input").value;
             const city = inputVal;
             
             console.log(city);
@@ -59,7 +61,8 @@
                 method: "GET"
             })
             .then(function(response1) {
-
+                
+                const icon = response1.weather[0].description;
                 const temp = response1.main.temp;
                 const wind = response1.wind.speed;
                 const humid = response1.main.humidity;
@@ -71,12 +74,12 @@
                 const m = moment();
                 
                 div3.setAttribute("class", "border rounded")
-                cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY"));
+                cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY") + " " + icon);
                 cityInfoSpan.setAttribute("class", "h1 navbar bg-light")
 
                 div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
-                tempSpan.setAttribute("class", "h4 pt-3 rounded bg-white navbar");
+                tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded bg-white navbar");
                 
                 div3.appendChild(humidSpan);
                 humidSpan.textContent = ("Humidity: " + humid + "%");
@@ -84,12 +87,12 @@
                 
                 div3.appendChild(windSpan);
                 windSpan.textContent = ("Wind Speed: " + wind + " mph");
-                windSpan.setAttribute("class", "h4 pt-3 rounded bg-white navbar");
+                windSpan.setAttribute("class", "h4 pt-3 pb-3 rounded bg-white navbar");
                 
                 
                 
                 
-                var queryURL2 = `http://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=${lat}&lon=${lon}`;
+                const queryURL2 = `http://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=${lat}&lon=${lon}`;
                 $.ajax({
                     url: queryURL2,
                     method: "GET"
@@ -100,7 +103,7 @@
                     const UV = response2.value
                     
                     //Creates button to display UV value form API
-                    var uvButton = document.createElement("button");
+                    const uvButton = document.createElement("button");
                     uvButton.textContent = (UV);
                     //Adds UV span inside div3
                     div3.appendChild(UVSpan);
@@ -123,7 +126,7 @@
                     }
 
 
-                        var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
+                        const queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
                     $.ajax({
                         url: queryURL3,
                         method: "GET"
@@ -167,19 +170,19 @@
                         
                         
                         day1.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day1Icon + "\r\n" + "Temp: " + Math.round(day1temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day1humidity + "%");
-                        day1.setAttribute("class", "d-inline-block h4 m-1 ml-2 p-3 bg-primary rounded text-white")
+                        day1.setAttribute("class", "d-inline-block h4 m-1 ml-2 p-3 bg-info rounded text-white")
                         
                         day2.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day2Icon + "\r\n" + "Temp: " + Math.round(day2temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day2humidity + "%");
-                        day2.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-primary rounded text-white")
+                        day2.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
                         
                         day3.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day3Icon + "\r\n" + "Temp: " + Math.round(day3temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day3humidity + "%");
-                        day3.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-primary rounded text-white")
+                        day3.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
                         
                         day4.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day4Icon + "\r\n" + "Temp: " + Math.round(day4temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day4humidity + "%");
-                        day4.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-primary rounded text-white")
+                        day4.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
                         
                         day5.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day5Icon + "\r\n" + "Temp: " + Math.round(day5temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day5humidity + "%");
-                        day5.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-primary rounded text-white") + "%"
+                        day5.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white") + "%"
                         
                         
                         
