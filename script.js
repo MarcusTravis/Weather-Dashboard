@@ -103,7 +103,7 @@
                 //ajax call to get weather info
                 
                 //logs URL info into consle
-                const icon = response1.weather[0].description;
+                const icon = response1.weather[0].icon;
                 const temp = response1.main.temp;
                 const wind = response1.wind.speed;
                 const humid = response1.main.humidity;
@@ -116,8 +116,12 @@
                 const m = moment();
                 
                 div3.setAttribute("class", "rounded")
-                cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY") + " " + icon);
-                cityInfoSpan.setAttribute("class", "h1 rounded navbar bg-light")
+                cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY"));
+                cityInfoSpan.setAttribute("class", "h1 rounded navbar justify-content-start bg-light")
+                const cityInfoDiv = document.createElement("div");
+                cityInfoSpan.appendChild(cityInfoDiv);
+                cityInfoDiv.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + icon + "@2x.png\">");
+                
 
                 div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
@@ -182,24 +186,63 @@
                         console.log(response3);
 
                         const day1 = document.createElement("div");
+                        const day1One = document.createElement("div");
+                        const day1Two = document.createElement("div");
+                        const day1Three = document.createElement("div");
+                        
                         const day2 = document.createElement("div");
+                        const day2One = document.createElement("div");
+                        const day2Two = document.createElement("div");
+                        const day2Three = document.createElement("div");
+                        
+                        
                         const day3 = document.createElement("div");
+                        const day3One = document.createElement("div");
+                        const day3Two = document.createElement("div");
+                        const day3Three = document.createElement("div");
+                        
                         const day4 = document.createElement("div");
+                        const day4One = document.createElement("div");
+                        const day4Two = document.createElement("div");
+                        const day4Three = document.createElement("div");
+                        
                         const day5 = document.createElement("div");
+                        const day5One = document.createElement("div");
+                        const day5Two = document.createElement("div");
+                        const day5Three = document.createElement("div");
 
                         div4.appendChild(day1);
+                        day1.appendChild(day1One);
+                        day1.appendChild(day1Two);
+                        day1.appendChild(day1Three);
+                        
                         div4.appendChild(day2);
+                        day2.appendChild(day2One);
+                        day2.appendChild(day2Two);
+                        day2.appendChild(day2Three);
+                        
                         div4.appendChild(day3);
+                        day3.appendChild(day3One);
+                        day3.appendChild(day3Two);
+                        day3.appendChild(day3Three);
+                        
                         div4.appendChild(day4);
+                        day4.appendChild(day4One);
+                        day4.appendChild(day4Two);
+                        day4.appendChild(day4Three);
+                        
                         div4.appendChild(day5);
+                        day5.appendChild(day5One);
+                        day5.appendChild(day5Two);
+                        day5.appendChild(day5Three);
                         div4.setAttribute("class", "mt-5")
 
                         
-                        const day1Icon = response3.list[4].weather[0].description;
-                        const day2Icon = response3.list[12].weather[0].description;
-                        const day3Icon = response3.list[20].weather[0].description;
-                        const day4Icon = response3.list[28].weather[0].description;
-                        const day5Icon = response3.list[36].weather[0].description;
+                        const day1Icon = response3.list[4].weather[0].icon;
+                        const day2Icon = response3.list[12].weather[0].icon;
+                        const day3Icon = response3.list[20].weather[0].icon;
+                        const day4Icon = response3.list[28].weather[0].icon;
+                        const day5Icon = response3.list[36].weather[0].icon;
                         
                         const day1temp = response3.list[4].main.temp
                         const day2temp = response3.list[12].main.temp
@@ -214,21 +257,40 @@
                         const day5humidity = response3.list[36].main.humidity
                         
                         
-                        day1.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day1Icon + "\r\n" + "Temp: " + Math.round(day1temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day1humidity + "%");
-                        day1.setAttribute("class", "d-inline-block h4 m-1 ml-2 p-3 bg-info rounded text-white")
+                        day1.setAttribute("class", "d-inline-block h5 m-1 ml-2 p-3 bg-info rounded text-white")
+                        day1One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
+                        day1Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day1Icon + "@2x.png\">");
+                        day1Three.innerText = ("Temp: " + Math.round(day1temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day1humidity + "%");
                         
-                        day2.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day2Icon + "\r\n" + "Temp: " + Math.round(day2temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day2humidity + "%");
-                        day2.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
                         
-                        day3.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day3Icon + "\r\n" + "Temp: " + Math.round(day3temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day3humidity + "%");
-                        day3.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
+                        day2.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
+                        day2One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
+                        day2Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day2Icon + "@2x.png\">");
+                        day2Three.innerText = ("Temp: " + Math.round(day2temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day2humidity + "%");
                         
-                        day4.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day4Icon + "\r\n" + "Temp: " + Math.round(day4temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day4humidity + "%");
-                        day4.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white")
                         
-                        day5.innerText = (m.add(1, 'days').format("MMMM Do YYYY") + "\r\n" + "" + day5Icon + "\r\n" + "Temp: " + Math.round(day5temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day5humidity + "%");
-                        day5.setAttribute("class", "d-inline-block h4 m-1 p-3 bg-info rounded text-white") + "%"
+                        day3.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
+                        day3One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
+                        day3Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day3Icon + "@2x.png\">");
+                        day3Three.innerText = ("Temp: " + Math.round(day3temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day3humidity + "%");
                         
+                        
+                        day4.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
+                        day4One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
+                        day4Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day4Icon + "@2x.png\">");
+                        day4Three.innerText = ("Temp: " + Math.round(day4temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day4humidity + "%");
+                        
+                        
+                        day5.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white") + "%"
+                        day5One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
+                        day5Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day5Icon + "@2x.png\">");
+                        day5Three.innerText = ("Temp: " + Math.round(day5temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day5humidity + "%");
+                        
+                        day1One.setAttribute("class", "h4")
+                        day2One.setAttribute("class", "h4")
+                        day3One.setAttribute("class", "h4")
+                        day4One.setAttribute("class", "h4")
+                        day5One.setAttribute("class", "h4")
                         
                         
                         
