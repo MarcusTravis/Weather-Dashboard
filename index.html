@@ -8,33 +8,34 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
-
+    
     <title>Weather Dashboard</title>
   </head>
   <body>
     <main class="container-fluid">
-        <!-- start header -->
-        <header class="row">
-            <div class="col h1 text-center pb-3 pt-3 bg-dark text-light">Weather Dashboard</div>
-        </header>
-        <!-- close header -->
-
-        <!-- start main -->
-        <div class="row">
-            <!-- start input col -->
-            <div class="col-md-4" id="leftCol"></div>
-            <!-- close input col -->
-
-            <div class="col-md-2"></div>
-
-            <!-- start output col -->
-            <div class="col-md-6" id="rightCol"></div>
-            <!-- close output col -->
-        </div>
-        <!-- close main -->
+      <!-- start header -->
+      <header class="row">
+        <div class="col h1 text-center pb-3 pt-3 bg-dark text-light">Weather Dashboard</div>
+      </header>
+      <!-- close header -->
+      
+      <!-- start main -->
+      <div class="row">
+        <!-- start input col -->
+        <div class="col-md-4" id="leftCol"></div>
+        <!-- close input col -->
+        
+        <div class="col-md-1"></div>
+        
+        <!-- start output col -->
+        <div class="col-md-7" id="rightCol"></div>
+        <!-- close output col -->
+      </div>
+      <!-- close main -->
     </main>
-
+    
     <!-- Optional JavaScript -->
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
