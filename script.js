@@ -1,14 +1,41 @@
-// GIVEN a weather dashboard with form inputs
+    
+    
+    // GIVEN a weather dashboard with form inputs
     //using html, create divs needed for acceptance critera
 
-// WHEN I search for a city
-// THEN I am presented with current and future conditions for that city and that city is added to the search history
+    // WHEN I search for a city
+    // THEN I am presented with current and future conditions for that city and that city is added to the search history
     //make an input section for html to retrieve info for city
     //create onclick function for input button
     //use local storage to keep data inside divs or spans
     //button needs to make call to weather API
+    // WHEN I view current weather conditions for that city
+    // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+    //display info retrieved for API
+    
+    // WHEN I view the UV index
+    // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+    //set class attributes to properly style uv index div using bootstrap
+    
+    // WHEN I view future weather conditions for that city
+    // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+    
+    
+    // WHEN I click on a city in the search history
+    // THEN I am again presented with current and future conditions for that city
+    
+    // WHEN I open the weather dashboard
+    // THEN I am presented with the last searched city forecast
     const body = document.getElementById("body");
     body.setAttribute("class", "bg-dark");
+
+    //Header
+    const header = document.getElementById("header");
+    header.setAttribute("class", "col display-3 font-weight-bolder text-center pb-3 pt-3 bg-info text-dark");
+    header.innerText = ("The Weather Dashboard");
+    //Header
+
+    //Main body
     const leftCol = document.getElementById("leftCol");
     const rightCol = document.getElementById("rightCol");
     const input = document.createElement("input");
@@ -16,52 +43,66 @@
     const div2 = document.createElement("div");
     const div3 = document.createElement("div");
     const div4 = document.createElement("div")
+    //Main body
+
+    //Variables of Current(today's) weather portion of info 
     const cityInfoSpan = document.createElement("span");
     const tempSpan = document.createElement("span");
     const humidSpan = document.createElement("span");
     const windSpan = document.createElement("span");
     const UVSpan = document.createElement("div");
+    //Variables of Current(today's) weather portion of info 
+
     const linebreak = document.createElement("br");
     const btn1 = document.createElement("button");
     
+    //Page is split between two main columns, a left and a right column
     leftCol.setAttribute("class", "h2 pl-5 pr-5 pb-5  border rounded bg-light");
     leftCol.appendChild(div1);
     leftCol.appendChild(div2);
     rightCol.appendChild(div3);
     rightCol.appendChild(div4);
+    //Page is split between two main columns, a left and a right column
     
+    //div1 goes inside leftCol
     div1.textContent = ("Search for a city:");
     div1.setAttribute("class", "h1");
+    //div1 goes inside leftCol
     
-
+    
+    //div2 goes inside leftCol next to input element so the button has it's own dedicated spot 
     div2.appendChild(input);
     input.setAttribute("class", "mt-3 rounded");
     input.setAttribute("placeholder", "Search...");
     input.setAttribute("id", "input");
     div2.appendChild(btn1);
     btn1.setAttribute("class", "fa fa-search 3x bg-info rounded border p-1 m-0 ml-1");
+    //div2 goes inside leftCol next to input element so the button has it's own dedicated spot
     
+    //div3 goes inside rightCol and holds all the info for today's date and weather
     div3.appendChild(cityInfoSpan);
     
-    
+    //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work
     btn1.addEventListener("click", getInput) 
-    
+
+        //function that makes the button's magic happen
         function getInput() {
 
-            const inputVal = document.getElementById("input").value;
-            const city = inputVal;
-            
+            //variable that get's user input and stores it in the URL for the ajax call
+            const city = document.getElementById("input").value;
             console.log(city);
             
             
-            
+            //ajax call to get weather info
             const queryURL1 = `http://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`
             $.ajax({
                 url: queryURL1,
                 method: "GET"
             })
             .then(function(response1) {
+                //ajax call to get weather info
                 
+                //logs URL info into consle
                 const icon = response1.weather[0].description;
                 const temp = response1.main.temp;
                 const wind = response1.wind.speed;
@@ -70,24 +111,25 @@
                 const lon = response1.coord.lon
                 console.log("Today's Weather response:");
                 console.log(response1);
+                //logs URL info into consle
 
                 const m = moment();
                 
-                div3.setAttribute("class", "border rounded")
+                div3.setAttribute("class", "rounded")
                 cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY") + " " + icon);
-                cityInfoSpan.setAttribute("class", "h1 navbar bg-light")
+                cityInfoSpan.setAttribute("class", "h1 rounded navbar bg-light")
 
                 div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
-                tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded bg-white navbar");
+                tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
                 
                 div3.appendChild(humidSpan);
                 humidSpan.textContent = ("Humidity: " + humid + "%");
-                humidSpan.setAttribute("class", "h4 pt-3 pb-3 navbar bg-light");
+                humidSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-light");
                 
                 div3.appendChild(windSpan);
                 windSpan.textContent = ("Wind Speed: " + wind + " mph");
-                windSpan.setAttribute("class", "h4 pt-3 pb-3 rounded bg-white navbar");
+                windSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
                 
                 
                 
@@ -105,11 +147,14 @@
                     //Creates button to display UV value form API
                     const uvButton = document.createElement("button");
                     uvButton.textContent = (UV);
+
                     //Adds UV span inside div3
                     div3.appendChild(UVSpan);
+
                     //Adds content inside UV span
                     UVSpan.textContent = ("UV Index: ");
                     UVSpan.setAttribute("class", "h4 pt-3 pl-3 pb-3 mb-0 rounded bg-light");
+                    
                     //Adds uv button that displays uv value
                     UVSpan.appendChild(uvButton);
                     uvButton.setAttribute("class", "rounded")
@@ -192,20 +237,4 @@
                 });
             });
         }
-        // WHEN I view current weather conditions for that city
-    // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-    //display info retrieved for API
-    
-    // WHEN I view the UV index
-    // THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-    //set class attributes to properly style uv index div using bootstrap
-    
-    // WHEN I view future weather conditions for that city
-    // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-    
-    
-    // WHEN I click on a city in the search history
-    // THEN I am again presented with current and future conditions for that city
-    
-    // WHEN I open the weather dashboard
-// THEN I am presented with the last searched city forecast
+        
