@@ -42,7 +42,8 @@
     const div1 = document.createElement("div");
     const div2 = document.createElement("div");
     const div3 = document.createElement("div");
-    const div4 = document.createElement("div")
+    const div4 = document.createElement("div");
+    div4.setAttribute("id", "div4");
     //Main body
 
     //Variables of Current(today's) weather portion of info 
@@ -81,13 +82,20 @@
     
     //div3 goes inside rightCol and holds all the info for today's date and weather
     div3.appendChild(cityInfoSpan);
+   
+    //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work 
+    btn1.addEventListener("click", getInput);
     
-    //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work
-    btn1.addEventListener("click", getInput) 
+    //when user clicks on search button, we will want to turn input into string
+    //add input value to variable then
+    //turn value into a string then use setItem method to add string to local storage
+    //take value  from local storage to create button or buttons and make event listener for quick searches
 
+        
         //function that makes the button's magic happen
         function getInput() {
-
+            
+            
             //variable that get's user input and stores it in the URL for the ajax call
             const city = document.getElementById("input").value;
             console.log(city);
@@ -112,7 +120,7 @@
                 console.log("Today's Weather response:");
                 console.log(response1);
                 //logs URL info into consle
-
+                
                 const m = moment();
                 
                 div3.setAttribute("class", "rounded")
@@ -121,8 +129,9 @@
                 const cityInfoDiv = document.createElement("div");
                 cityInfoSpan.appendChild(cityInfoDiv);
                 cityInfoDiv.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + icon + "@2x.png\">");
+                cityInfoDiv.setAttribute("class", "bg-info rounded-circle ml-5");
                 
-
+                
                 div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
                 tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
@@ -154,7 +163,7 @@
 
                     //Adds UV span inside div3
                     div3.appendChild(UVSpan);
-
+                    
                     //Adds content inside UV span
                     UVSpan.textContent = ("UV Index: ");
                     UVSpan.setAttribute("class", "h4 pt-3 pl-3 pb-3 mb-0 rounded bg-light");
@@ -162,7 +171,7 @@
                     //Adds uv button that displays uv value
                     UVSpan.appendChild(uvButton);
                     uvButton.setAttribute("class", "rounded")
-
+                    
                     //colors uv button background depending on how high or low uv index is.
                     if (response2.value > 0) {
                         uvButton.setAttribute("class", "bg-success rounded");
@@ -173,18 +182,19 @@
                     if (response2.value > 8) {
                         uvButton.setAttribute("class", "bg-danger rounded");
                     }
-
-
-                        const queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
+                    
+                    
+                    const queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
                     $.ajax({
                         url: queryURL3,
                         method: "GET"
                     })
                     .then(function(response3) {
-                    
+
+                        
                         console.log("5 day forecast response:");
                         console.log(response3);
-
+                        
                         const day1 = document.createElement("div");
                         const day1One = document.createElement("div");
                         const day1Two = document.createElement("div");
@@ -210,6 +220,9 @@
                         const day5One = document.createElement("div");
                         const day5Two = document.createElement("div");
                         const day5Three = document.createElement("div");
+                        
+                        //empties div4 before prepending
+                        $("#div4").empty();
 
                         div4.appendChild(day1);
                         day1.appendChild(day1One);
@@ -236,7 +249,7 @@
                         day5.appendChild(day5Two);
                         day5.appendChild(day5Three);
                         div4.setAttribute("class", "mt-5")
-
+                        
                         
                         const day1Icon = response3.list[4].weather[0].icon;
                         const day2Icon = response3.list[12].weather[0].icon;
@@ -294,9 +307,11 @@
                         
                         
                         
+                        
                     });  
                     
                 });
             });
         }
+    
         
