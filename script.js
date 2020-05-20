@@ -33,7 +33,7 @@
     const header = document.getElementById("header");
     header.setAttribute("class", "col display-3 font-weight-bolder text-center pb-3 pt-3 bg-info text-dark");
     header.innerText = ("The Weather Dashboard");
-    //Header
+    //^Header^
 
     //Main body
     const leftCol = document.getElementById("leftCol");
@@ -44,7 +44,7 @@
     const div3 = document.createElement("div");
     const div4 = document.createElement("div");
     div4.setAttribute("id", "div4");
-    //Main body
+    //^Main body^
 
     //Variables of Current(today's) weather portion of info 
     const cityInfoSpan = document.createElement("span");
@@ -52,7 +52,7 @@
     const humidSpan = document.createElement("span");
     const windSpan = document.createElement("span");
     const UVSpan = document.createElement("div");
-    //Variables of Current(today's) weather portion of info 
+    //^Variables of Current(today's) weather portion of info ^
 
     const linebreak = document.createElement("br");
     const btn1 = document.createElement("button");
@@ -63,12 +63,12 @@
     leftCol.appendChild(div2);
     rightCol.appendChild(div3);
     rightCol.appendChild(div4);
-    //Page is split between two main columns, a left and a right column
+    //^Page is split between two main columns, a left and a right column^
     
     //div1 goes inside leftCol
     div1.textContent = ("Search for a city:");
     div1.setAttribute("class", "h1");
-    //div1 goes inside leftCol
+    //^div1 goes inside leftCol^
     
     
     //div2 goes inside leftCol next to input element so the button has it's own dedicated spot 
@@ -78,13 +78,14 @@
     input.setAttribute("id", "input");
     div2.appendChild(btn1);
     btn1.setAttribute("class", "fa fa-search 3x bg-info rounded border p-1 m-0 ml-1");
-    //div2 goes inside leftCol next to input element so the button has it's own dedicated spot
+    //^div2 goes inside leftCol next to input element so the button has it's own dedicated spot^
     
     //div3 goes inside rightCol and holds all the info for today's date and weather
     div3.appendChild(cityInfoSpan);
    
     //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work 
     btn1.addEventListener("click", getInput);
+    
     
     //when user clicks on search button, we will want to turn input into string
     //add input value to variable then
@@ -95,11 +96,20 @@
         //function that makes the button's magic happen
         function getInput() {
             
+            //add a span with the user input inside span
+            // const div5 = document.createElement("div");
+            // const userInputSpan = document.createElement("button");
+            // userInputSpan.setAttribute("class", "bg-info rounded border");
+            // userInputSpan.setAttribute("style", "padding-left: 135px; padding-right: 135px;");
+            // div2.appendChild(div5);
+            // div5.prepend(userInputSpan);
             
             //variable that get's user input and stores it in the URL for the ajax call
             const city = document.getElementById("input").value;
             console.log(city);
             
+            // userInputSpan.innerHTML= (city);
+
             
             //ajax call to get weather info
             const queryURL1 = `http://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`
@@ -108,7 +118,7 @@
                 method: "GET"
             })
             .then(function(response1) {
-                //ajax call to get weather info
+                //^ajax call to get weather info^
                 
                 //logs URL info into consle
                 const icon = response1.weather[0].icon;
@@ -119,7 +129,7 @@
                 const lon = response1.coord.lon
                 console.log("Today's Weather response:");
                 console.log(response1);
-                //logs URL info into consle
+                //^logs URL info into consle^
                 
                 const m = moment();
                 
@@ -307,11 +317,8 @@
                         
                         
                         
-                        
                     });  
-                    
                 });
             });
         }
-    
-        
+
