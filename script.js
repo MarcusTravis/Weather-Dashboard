@@ -83,36 +83,69 @@
     //div3 goes inside rightCol and holds all the info for today's date and weather
     div3.appendChild(cityInfoSpan);
    
+    //storageArray variable
+    const localStorageString = localStorage.getItem("city");
+    const localStorageArray = JSON.parse(localStorageString);
+
+    console.log(localStorageArray);
+    
+
+    for (let i = 0; i < localStorageArray.length; i++) {
+         let e = localStorageArray[i];
+         let div5 = document.createElement("div");
+         let userInputSpan = document.createElement("button");
+         userInputSpan.setAttribute("class", "bg-info rounded border text-center");
+         userInputSpan.setAttribute("style", "width: 200px;");
+         userInputSpan.textContent = (e);
+         div2.appendChild(div5);
+         div5.prepend(userInputSpan);
+    }
+    
+    
     //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work 
     btn1.addEventListener("click", getInput);
-    
     
     //when user clicks on search button, we will want to turn input into string
     //add input value to variable then
     //turn value into a string then use setItem method to add string to local storage
     //take value  from local storage to create button or buttons and make event listener for quick searches
 
+    
+    //function that makes the button's magic happen
+    function getInput() {
         
-        //function that makes the button's magic happen
-        function getInput() {
-            
-            //add a span with the user input inside span
-            // const div5 = document.createElement("div");
-            // const userInputSpan = document.createElement("button");
-            // userInputSpan.setAttribute("class", "bg-info rounded border");
-            // userInputSpan.setAttribute("style", "padding-left: 135px; padding-right: 135px;");
-            // div2.appendChild(div5);
-            // div5.prepend(userInputSpan);
+        // add a span with the user input inside span
+        const div5 = document.createElement("div");
+        const userInputSpan = document.createElement("button");
+        userInputSpan.setAttribute("class", "bg-info rounded border text-center");
+        userInputSpan.setAttribute("style", "width: 200px;");
+        div2.appendChild(div5);
+        div5.prepend(userInputSpan);
             
             //variable that get's user input and stores it in the URL for the ajax call
             const city = document.getElementById("input").value;
-            console.log(city);
+            // console.log(city);
             
-            // userInputSpan.innerHTML= (city);
+            //gets user input and stores value in userInputSpan
+            userInputSpan.innerHTML= (city);
+            
+            const localStorageString2 = localStorage.getItem("city");
+            const localStorageArray2 = JSON.parse(localStorageString2);
+
+            //stores input value inside storageArray
+            localStorageArray2.push(city);
+            console.log(localStorageArray2);
+
+            //stores array value in local storage when search button is press
+            if (city) {
+                localStorage.setItem("city", JSON.stringify(localStorageArray2));
+                // location.reload();
+                console.log(localStorage);
+            }
 
             
             //ajax call to get weather info
-            const queryURL1 = `http://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`
+            const queryURL1 = `https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`
             $.ajax({
                 url: queryURL1,
                 method: "GET"
@@ -131,25 +164,30 @@
                 console.log(response1);
                 //^logs URL info into consle^
                 
+                //introduces moment to webpage and stores value inside variable for easier typing
                 const m = moment();
                 
+                //Main div with current weather data, moment date added next to city name from user
                 div3.setAttribute("class", "rounded")
                 cityInfoSpan.innerText = (city + ",   " + m.format("MMMM Do YYYY"));
                 cityInfoSpan.setAttribute("class", "h1 rounded navbar justify-content-start bg-light")
                 const cityInfoDiv = document.createElement("div");
                 cityInfoSpan.appendChild(cityInfoDiv);
-                cityInfoDiv.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + icon + "@2x.png\">");
+                cityInfoDiv.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + icon + "@2x.png\">");
                 cityInfoDiv.setAttribute("class", "bg-info rounded-circle ml-5");
+                //^Main div with current weather data, moment date added next to city name from user^
                 
-                
+                //temp span for current weather located directly under city from user input
                 div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
                 tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
                 
+                //humidity span for current weather located directly under city from user input
                 div3.appendChild(humidSpan);
                 humidSpan.textContent = ("Humidity: " + humid + "%");
                 humidSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-light");
                 
+                //wind speed span for current weather located directly under city from user input
                 div3.appendChild(windSpan);
                 windSpan.textContent = ("Wind Speed: " + wind + " mph");
                 windSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
@@ -157,7 +195,7 @@
                 
                 
                 
-                const queryURL2 = `http://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=${lat}&lon=${lon}`;
+                const queryURL2 = `https://api.openweathermap.org/data/2.5/uvi?appid=a2c6aeb70811d753296d3acafec7dceb&lat=${lat}&lon=${lon}`;
                 $.ajax({
                     url: queryURL2,
                     method: "GET"
@@ -194,7 +232,7 @@
                     }
                     
                     
-                    const queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
+                    const queryURL3 = `https://api.openweathermap.org/data/2.5/forecast?units=imperial&q=${city}&appid=a2c6aeb70811d753296d3acafec7dceb`;
                     $.ajax({
                         url: queryURL3,
                         method: "GET"
@@ -282,31 +320,31 @@
                         
                         day1.setAttribute("class", "d-inline-block h5 m-1 ml-2 p-3 bg-info rounded text-white")
                         day1One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
-                        day1Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day1Icon + "@2x.png\">");
+                        day1Two.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + day1Icon + "@2x.png\">");
                         day1Three.innerText = ("Temp: " + Math.round(day1temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day1humidity + "%");
                         
                         
                         day2.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
                         day2One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
-                        day2Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day2Icon + "@2x.png\">");
+                        day2Two.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + day2Icon + "@2x.png\">");
                         day2Three.innerText = ("Temp: " + Math.round(day2temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day2humidity + "%");
                         
                         
                         day3.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
                         day3One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
-                        day3Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day3Icon + "@2x.png\">");
+                        day3Two.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + day3Icon + "@2x.png\">");
                         day3Three.innerText = ("Temp: " + Math.round(day3temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day3humidity + "%");
                         
                         
                         day4.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white")
                         day4One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
-                        day4Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day4Icon + "@2x.png\">");
+                        day4Two.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + day4Icon + "@2x.png\">");
                         day4Three.innerText = ("Temp: " + Math.round(day4temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day4humidity + "%");
                         
                         
                         day5.setAttribute("class", "d-inline-block h5 m-1 p-3 bg-info rounded text-white") + "%"
                         day5One.innerText = (m.add(1, 'days').format("MMMM Do YYYY"));
-                        day5Two.innerHTML = ("<img src=\"http://openweathermap.org/img/wn/" + day5Icon + "@2x.png\">");
+                        day5Two.innerHTML = ("<img src=\"https://openweathermap.org/img/wn/" + day5Icon + "@2x.png\">");
                         day5Three.innerText = ("Temp: " + Math.round(day5temp) + "\xB0 F" + "\r\n" + "Humidity: " +  day5humidity + "%");
                         
                         day1One.setAttribute("class", "h4")
