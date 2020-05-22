@@ -93,7 +93,7 @@
         localStorageArray = JSON.parse(localStorageString);
         } else {
         localStorageArray = [];
-
+        }
 
     console.log(localStorageArray);
     
