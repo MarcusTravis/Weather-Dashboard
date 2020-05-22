@@ -84,8 +84,16 @@
     div3.appendChild(cityInfoSpan);
    
     //storageArray variable
+    // const localStorageString = localStorage.getItem("city");
+    // const localStorageArray = JSON.parse(localStorageString);
+
     const localStorageString = localStorage.getItem("city");
-    const localStorageArray = JSON.parse(localStorageString);
+        let localStorageArray;
+        if(localStorageString){
+        localStorageArray = JSON.parse(localStorageString);
+        } else {
+        localStorageArray = [];
+
 
     console.log(localStorageArray);
     
