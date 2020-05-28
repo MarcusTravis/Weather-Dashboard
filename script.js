@@ -86,31 +86,39 @@
     //storageArray variable
     // const localStorageString = localStorage.getItem("city");
     // const localStorageArray = JSON.parse(localStorageString);
+    let div5 = document.createElement("div");
 
     const localStorageString = localStorage.getItem("city");
-        let localStorageArray;
-        if(localStorageString){
+    let localStorageArray;
+    if(localStorageString){
         localStorageArray = JSON.parse(localStorageString);
+        for (let i = 0; i < localStorageArray.length; i++) {
+             let e = localStorageArray[i];
+             let userInputSpan = document.createElement("button");
+             userInputSpan.setAttribute("class", "bg-info rounded border text-center");
+             userInputSpan.setAttribute("style", "width: 200px;");
+             userInputSpan.textContent = (e);
+             div2.appendChild(div5);
+             div5.prepend(userInputSpan);
+             div5.setAttribute("id", "div5");
+             div5.setAttribute("class", "d-flex flex-column justify-content-center");
+            }
         } else {
-        localStorageArray = [];
-
-
-    console.log(localStorageArray);
+            localStorageArray = [];
+            localStorage.setItem ("city", JSON.stringify(localStorageArray));
+        }
+        
     
+    
+    // const giveInputButtonValue = function () {
+    //     input.value = div5.textContent
+    // }
+    // div5.addEventListener("click", giveInputButtonValue);
 
-    for (let i = 0; i < localStorageArray.length; i++) {
-         let e = localStorageArray[i];
-         let div5 = document.createElement("div");
-         let userInputSpan = document.createElement("button");
-         userInputSpan.setAttribute("class", "bg-info rounded border text-center");
-         userInputSpan.setAttribute("style", "width: 200px;");
-         userInputSpan.textContent = (e);
-         div2.appendChild(div5);
-         div5.prepend(userInputSpan);
-    }
     
     
     //This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work 
+    
     btn1.addEventListener("click", getInput);
     
     //when user clicks on search button, we will want to turn input into string
@@ -140,12 +148,12 @@
             const localStorageString2 = localStorage.getItem("city");
             const localStorageArray2 = JSON.parse(localStorageString2);
 
+            
             //stores input value inside storageArray
-            localStorageArray2.push(city);
-            console.log(localStorageArray2);
-
             //stores array value in local storage when search button is press
-            if (city) {
+            if (localStorageArray2) {
+                localStorageArray2.push(city);
+                console.log(localStorageArray2);
                 localStorage.setItem("city", JSON.stringify(localStorageArray2));
                 // location.reload();
                 console.log(localStorage);
