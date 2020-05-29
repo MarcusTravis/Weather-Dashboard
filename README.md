@@ -49,7 +49,7 @@ Insert this URL into the web to run this webpage: https://marcustravis.github.io
 Myself with the help of my teachers and classmates from the University of Arizona coding bootcamp.
 
 ## Version
-(Update this as needed)
+
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
