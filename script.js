@@ -47,31 +47,15 @@
     //^Variables of Current(today's) weather portion of info ^
 
     const linebreak = document.createElement("br");
-    const btn1 = document.createElement("button");
+    const btn1 = document.getElementById("btn1");
     
     //Page is split between two main columns, a left and a right column
-    leftCol.setAttribute("class", "h2 pl-5 pr-5 pb-5  border rounded bg-light");
-    leftCol.appendChild(div1);
+
     leftCol.appendChild(div2);
     rightCol.appendChild(div3);
     rightCol.appendChild(div4);
     //^Page is split between two main columns, a left and a right column^
-    
-    //div1 goes inside leftCol
-    div1.textContent = ("Search for a city:");
-    div1.setAttribute("class", "h1");
-    //^div1 goes inside leftCol^
-    
-    
-    //div2 goes inside leftCol next to input element so the button has it's own dedicated spot 
-    div2.appendChild(input);
-    input.setAttribute("class", "mt-3 rounded");
-    input.setAttribute("placeholder", "Search...");
-    input.setAttribute("id", "input");
-    div2.appendChild(btn1);
-    btn1.setAttribute("class", "fa fa-search 3x bg-info rounded border p-1 m-0 ml-1");
-    //^div2 goes inside leftCol next to input element so the button has it's own dedicated spot^
-    
+
     //div3 goes inside rightCol and holds all the info for today's date and weather
     div3.appendChild(cityInfoSpan);
    
