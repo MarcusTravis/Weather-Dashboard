@@ -26,14 +26,6 @@
     
     // WHEN I open the weather dashboard
     // THEN I am presented with the last searched city forecast
-    const body = document.getElementById("body");
-    body.setAttribute("class", "bg-dark");
-
-    //Header
-    const header = document.getElementById("header");
-    header.setAttribute("class", "col display-3 font-weight-bolder text-center pb-3 pt-3 bg-info text-dark");
-    header.innerText = ("The Weather Dashboard");
-    //^Header^
 
     //Main body
     const leftCol = document.getElementById("leftCol");
