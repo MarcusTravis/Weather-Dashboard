@@ -95,7 +95,10 @@ btn1.addEventListener("click", getInput);
 
 //function that makes the button's magic happen
 function getInput() {
-    
+  
+  if (input.getElementById("input").value = "") {
+    return;
+  }
   // add a span with the user input inside span
   const div5 = document.createElement("div");
   const userInputSpan = document.createElement("button");
@@ -103,9 +106,8 @@ function getInput() {
   userInputSpan.setAttribute("style", "width: 200px;");
   div2.appendChild(div5);
   div5.prepend(userInputSpan);
-  if (userInputSpan.value = "") {
-    return;
-  }
+
+
   //variable that get's user input and stores it in the URL for the ajax call
   const city = document.getElementById("input").value;
   // console.log(city);
