@@ -30,34 +30,17 @@
     //Main body
     const leftCol = document.getElementById("leftCol");
     const rightCol = document.getElementById("rightCol");
-    const input = document.createElement("input");
-    const div1 = document.createElement("div");
-    const div2 = document.createElement("div");
-    const div3 = document.createElement("div");
-    const div4 = document.createElement("div");
-    div4.setAttribute("id", "div4");
-    //^Main body^
+    const div1 = document.getElementById("div1");
+    const div2 = document.getElementById("div2");
+    const cityInfoSpan = document.getElementById("CIS");
+    const tempSpan = document.getElementById("tempSpan");
+    const humidSpan = document.getElementById("humidSpan");
+    const windSpan = document.getElementById("windSpan");
 
-    //Variables of Current(today's) weather portion of info 
-    const cityInfoSpan = document.createElement("span");
-    const tempSpan = document.createElement("span");
-    const humidSpan = document.createElement("span");
-    const windSpan = document.createElement("span");
     const UVSpan = document.createElement("div");
-    //^Variables of Current(today's) weather portion of info ^
 
     const linebreak = document.createElement("br");
-    const btn1 = document.getElementById("btn1");
-    
-    //Page is split between two main columns, a left and a right column
-
-    leftCol.appendChild(div2);
-    rightCol.appendChild(div3);
-    rightCol.appendChild(div4);
-    //^Page is split between two main columns, a left and a right column^
-
-    //div3 goes inside rightCol and holds all the info for today's date and weather
-    div3.appendChild(cityInfoSpan);
+    const btn1 = document.getElementById("btn1")
    
     //storageArray variable
     // const localStorageString = localStorage.getItem("city");
@@ -170,17 +153,14 @@
                 //^Main div with current weather data, moment date added next to city name from user^
                 
                 //temp span for current weather located directly under city from user input
-                div3.appendChild(tempSpan);
                 tempSpan.innerText = ("Tempurature: " + temp + "\xB0 F");
                 tempSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
                 
                 //humidity span for current weather located directly under city from user input
-                div3.appendChild(humidSpan);
                 humidSpan.textContent = ("Humidity: " + humid + "%");
                 humidSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-light");
                 
                 //wind speed span for current weather located directly under city from user input
-                div3.appendChild(windSpan);
                 windSpan.textContent = ("Wind Speed: " + wind + " mph");
                 windSpan.setAttribute("class", "h4 pt-3 pb-3 rounded navbar bg-white");
                 
@@ -201,10 +181,8 @@
                     const uvButton = document.createElement("button");
                     uvButton.textContent = (UV);
 
-                    //Adds UV span inside div3
-                    div3.appendChild(UVSpan);
-                    
                     //Adds content inside UV span
+                    div3.appendChild(UVSpan);
                     UVSpan.textContent = ("UV Index: ");
                     UVSpan.setAttribute("class", "h4 pt-3 pl-3 pb-3 mb-0 rounded bg-light");
                     
