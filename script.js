@@ -50,6 +50,11 @@ let localStorageArray;
     localStorage.setItem("city", JSON.stringify(localStorageArray));
     }
 
+    function clearAll() {
+      localStorage.clear();
+      window.location.reload();
+    }
+    
 // This is the button that brings the magic to the page! Must be clicked with a city name inside the input in order to work
 btn1.addEventListener("click", getInput);
 //function that makes the button's magic happen
