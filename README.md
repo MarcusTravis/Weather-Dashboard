@@ -17,20 +17,11 @@
 
 ## Description
 
-This is a weather dashboard where you can find a 5 day forecast, and info on the current days weather along with a colored uv index. Green means low, orange is moderate, and red is a high uv index. This webpage also utilizes local storage to save recent searches for easier access to the weather info next time you use it. Just type the city name and watch the magic happen! 
+This is a weather dashboard using weather APIs for information where you can find a 5 day forecast, and info on the current days weather along with a colored uv index. Green means low, orange is moderate, and red is a high uv index. This webpage also utilizes local storage to save recent searches for easier access to the weather info next time you use it. Just type the city name and watch the magic happen! 
 
 ### Prerequisites
 
 I prefer to use google chrome to run this webpage but most up to date web viewers should be just fine!
-
-### Installing
-
-Install a web viewer like google chrome and make sure you have internet access to view this webpage.
-
-
-## Running the tests
-
-N/A
 
 ## Deployment
 
@@ -38,11 +29,11 @@ Insert this URL into the web to run this webpage: https://marcustravis.github.io
 
 ## Built With
 
-*HTML
-*Bootstrap
-*JavaScript
-*jQuery
-*OpenWeather API
+* HTML5
+* Bootstrap
+* JavaScript
+* jQuery for Ajax calls
+* OpenWeather API's
 
 ## Contributing
 
